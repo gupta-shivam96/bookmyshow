@@ -85,4 +85,4 @@ Unique constraint on names where it is requred then try to persist duplicate rec
 
 add not null constraints where it is required
 
-Implement Centralized logging AOP Implementaiton add dependency first# bookmyshow
+Implement Centralized logging AOP Implementaiton add dependency first
