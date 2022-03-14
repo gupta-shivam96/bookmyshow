@@ -11,7 +11,6 @@ import org.springframework.util.StringUtils;
 import com.webapp.bookmyshowapp.exceptions.MovieException;
 import com.webapp.bookmyshowapp.form.MovieCreateForm;
 import com.webapp.bookmyshowapp.messages.CommonErrorMessageConstant;
-import com.webapp.bookmyshowapp.util.MovieUtil;
 
 @Component
 public class MovieValidation {
@@ -32,6 +31,11 @@ public class MovieValidation {
 			if(StringUtils.isEmpty(movieCreateForm.getName())) {
 				validationErrorList.add("Name" + commonErrorMessageConstant.getBlankError());
 			}
+			if(StringUtils.isEmpty(movieCreateForm.getImageName())) {
+				validationErrorList.add("Image Name" + commonErrorMessageConstant.getBlankError());
+			}
+			
+			
 		}catch(Exception e) {
 			throw new MovieException(e.getMessage());
 		}

@@ -1,11 +1,10 @@
 package com.webapp.bookmyshowapp.form;
 
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -30,8 +29,11 @@ public class MovieCreateForm {
 	private String genre;
 
 	@NotBlank(message="certificate type should not be blank.")
-	private String certifcateType;
+	private String certificateType;
 
+	@NotBlank(message="imageName type should not be blank.")
+	private String imageName;
+	
 	@NotNull(message="rating should not be blank.")
 	private Integer rating;
 

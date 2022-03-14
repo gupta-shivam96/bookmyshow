@@ -62,13 +62,13 @@ public class MovieServiceImpl implements MovieService{
 	}
 
 	@Override
-	public Movie getMovie(long id) {
+	public Movie getMovie(String movieName) {
 		// TODO Auto-generated method stub
 		Movie movie = null;
 		try {
-			log.info("Fetching movie from database for id : " + id);
-			movie = movieRepository.findById(id);
-			log.info("Movie fetched from database successfully for id : " + id);
+			log.info("Fetching movie from database for movieName : " + movieName);
+			movie = movieRepository.findByName(movieName);
+			log.info("Movie fetched from database successfully for id : " + movie);
 		}catch(Exception ex) {
 			throw ex;
 		}

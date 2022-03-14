@@ -72,7 +72,9 @@
                     <td v-for="movie in movies" :key="movie.id">
                         <a href="">
                         <div class="card" style="width: 18rem;">
+                            <router-link v-bind:to="'/movie/' + movie.name">
                             <img class="card-img-top" src="../assets/batman.jpg" alt="Card image cap">
+                            </router-link>
                             <div class="card-body">
                                 <p class="card-text">{{movie.name}}</p>
                             </div>
@@ -115,7 +117,6 @@ export default {
                 })
         },
         getMovies(cityName) {
-            console.log(cityName);
             this.selectedCity = cityName;
             axios.get('http://localhost:8081/api/movies/'+this.selectedCity)
                 .then((response) => {

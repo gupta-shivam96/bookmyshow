@@ -7,7 +7,7 @@ import com.webapp.bookmyshowapp.model.Movie;
 
 public interface MovieService {
 
-	Movie getMovie(long id);
+	Movie getMovie(String movieName);
 
 	Movie saveMovie(MovieCreateForm movieCreateForm) throws Exception;
 	

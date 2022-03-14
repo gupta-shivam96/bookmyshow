@@ -7,7 +7,7 @@ public class RestEndPoints {
 	 * movie
 	 */
 	public static final String CREATE_MOVIE = "/movie/new";
-	public static final String GET_MOVIE = "/movie/{id}";
+	public static final String GET_MOVIE = "/movie/{movie_name}";
 	public static final String DELETE_MOVIE = "/movie/delete/{id}";
 	/*
 	* city

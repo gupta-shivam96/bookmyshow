@@ -69,10 +69,10 @@ public class MovieController extends BaseExceptionHandler {
 	}
 
 	@GetMapping(RestEndPoints.GET_MOVIE)
-	public ResponseEntity<Object> getMovie(@PathVariable("id") long id){
+	public ResponseEntity<Object> getMovie(@PathVariable("movie_name") String movieName){
 		Movie movie = null;
 		try {
-			movie = movieService.getMovie(id); 
+			movie = movieService.getMovie(movieName); 
 			if(Objects.isNull(movie)) {
 				return handle404ResourceNotFoundRequest(ConstantUtil.ERROR_MOVIE_NOT_FOUND);
 			}
