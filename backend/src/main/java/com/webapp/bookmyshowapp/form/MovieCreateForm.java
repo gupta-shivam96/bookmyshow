@@ -34,6 +34,9 @@ public class MovieCreateForm {
 	@NotBlank(message="imageName type should not be blank.")
 	private String imageName;
 	
+	@NotBlank(message="backgroundImageName type should not be blank.")
+	private String backgroundImageName;
+	
 	@NotNull(message="rating should not be blank.")
 	private Integer rating;
 

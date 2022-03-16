@@ -1,7 +1,6 @@
 package com.webapp.bookmyshowapp.model;
 
 import java.io.Serializable;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -53,6 +52,8 @@ public class Movie implements Serializable{
 	private String duration;
 
 	private String imageName;
+	
+	private String backgroundImageName;
 	
 	@JsonFormat(pattern = "dd MMMM yyyy")
 	private Date releaseDate;

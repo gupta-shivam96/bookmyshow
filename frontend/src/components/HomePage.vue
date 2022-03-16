@@ -73,7 +73,7 @@
                         <a href="">
                         <div class="card" style="width: 18rem;">
                             <router-link v-bind:to="'/movie/' + movie.name">
-                            <img class="card-img-top" src="../assets/batman.jpg" alt="Card image cap">
+                            <img class="card-img-top" v-bind:src="require('../assets/' + movie.imageName)" alt="Card image cap">
                             </router-link>
                             <div class="card-body">
                                 <p class="card-text">{{movie.name}}</p>
@@ -99,7 +99,8 @@ export default {
             cities: [],
             movies: [],
             rowsLength: 0,
-            selectedCity: ""
+            selectedCity: "",
+            imageName: "batman.jpg"
         }
     },
     methods : {

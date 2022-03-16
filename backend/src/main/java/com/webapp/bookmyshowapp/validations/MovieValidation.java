@@ -34,6 +34,9 @@ public class MovieValidation {
 			if(StringUtils.isEmpty(movieCreateForm.getImageName())) {
 				validationErrorList.add("Image Name" + commonErrorMessageConstant.getBlankError());
 			}
+			if(StringUtils.isEmpty(movieCreateForm.getBackgroundImageName())) {
+				validationErrorList.add("Image Name" + commonErrorMessageConstant.getBlankError());
+			}
 			
 			
 		}catch(Exception e) {

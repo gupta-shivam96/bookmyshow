@@ -65,6 +65,7 @@ public class MovieUtil extends DateUtil{
 			movie.setGenre(Genre.valueOf(movieCreateForm.getGenre()));
 			movie.setCertificateType(CertificateType.valueOf(movieCreateForm.getCertificateType()));
 			movie.setImageName(movieCreateForm.getImageName());
+			movie.setBackgroundImageName(movieCreateForm.getBackgroundImageName());
 			movie.setRating(movieCreateForm.getRating());
 			movie.setCreated(getCurrentDateAndTime());
 			movie.setCreated(getCurrentDateAndTime());

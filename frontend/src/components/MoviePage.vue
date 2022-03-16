@@ -1,12 +1,12 @@
 <template>
   <div class="moviesdetails">
-      <section class="sc-qswwm9-0 kOcoaQ"><div class="sc-qswwm9-1 gbhOJZ" style="background-image: linear-gradient(90deg, rgb(34, 34, 34) 24.97%, rgb(34, 34, 34) 38.3%, rgba(34, 34, 34, 0.04) 97.47%, rgb(34, 34, 34) 100%), url(&quot;https://assets-in.bmscdn.com/iedb/movies/images/mobile/listing/xxlarge/gangubai-kathiawadi-et00114897-22-02-2022-01-07-14.jpg&quot;);">
+      <section class="sc-qswwm9-0 kOcoaQ"><div class="sc-qswwm9-1 gbhOJZ"  v-bind:style="{'background-image': 'linear-gradient(90deg, rgb(34, 34, 34) 24.97%, rgb(34, 34, 34) 38.3%, rgba(34, 34, 34, 0.04) 97.47%, rgb(34, 34, 34) 100%),url(' + require('../assets/' + movie.backgroundImageName) + ')'}">
       <div class="sc-qswwm9-2 cUDDgh">
         <div class="sc-qswwm9-4 eWuQcQ">
           <section class="sc-bsek5f-0 fSyllq">
             <div type="vertical" class="sc-echj48-0 iCYiPJ">
               <div class="sc-echj48-6 CwtfA" style="border-radius: 16px 16px 0px 0px; object-fit: cover;">
-                <img src="https://assets-in.bmscdn.com/iedb/movies/images/mobile/thumbnail/xlarge/gangubai-kathiawadi-et00114897-22-02-2022-01-07-14.jpg" alt="Gangubai Kathiawadi" width="100%" height="100%" class="sc-echj48-5 hutamn" style="border-radius: 16px 16px 0px 0px; object-fit: cover;">
+                <img v-bind:src="require('../assets/' + movie.imageName)" alt="Gangubai Kathiawadi" width="100%" height="100%" class="sc-echj48-5 hutamn" style="border-radius: 16px 16px 0px 0px; object-fit: cover;">
               </div>
               <div class="sc-xta4k3-0 gHQsqQ">
                 <svg width="13" height="13"><use xlink:href="/chunks/icons/synopsis-icons-96c193d5.svg#icon-play-no-bg"></use></svg><span>Trailer</span>
