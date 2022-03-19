@@ -37,9 +37,11 @@
           </div>
           <div class="sc-qswwm9-8 jayiEd">
               <div id="page-cta-container" class="sc-11ze7wi-0 hVHETZ">
+                  <router-link v-bind:to="'/theater/' + cityName + '/' + movieName ">
                 <button data-phase="postRelease" class="sc-8f9mtj-0 sc-8f9mtj-1 sc-1vmod7e-0 gsJmXR">
                   <div class="sc-1vmod7e-2 cgQNto"><span style="font-weight: 500; font-size: 16px; color: rgb(255, 255, 255);">Book tickets</span></div>
                 </button>
+                  </router-link>
               </div>
           </div>
           </div>
@@ -105,6 +107,7 @@ export default {
     data () {
         return {
             movie : null,
+            cityName : this.$route.params.cityName,
             movieName : this.$route.params.movieName
         }
     },

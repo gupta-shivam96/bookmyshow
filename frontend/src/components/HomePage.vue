@@ -72,7 +72,7 @@
                     <td v-for="movie in movies" :key="movie.id">
                         <a href="">
                         <div class="card" style="width: 18rem;">
-                            <router-link v-bind:to="'/movie/' + movie.name">
+                            <router-link v-bind:to="'/movie/' + selectedCity + '/' + movie.name">
                             <img class="card-img-top" v-bind:src="require('../assets/' + movie.imageName)" alt="Card image cap">
                             </router-link>
                             <div class="card-body">

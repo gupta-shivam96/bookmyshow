@@ -35,10 +35,8 @@ public class MovieValidation {
 				validationErrorList.add("Image Name" + commonErrorMessageConstant.getBlankError());
 			}
 			if(StringUtils.isEmpty(movieCreateForm.getBackgroundImageName())) {
-				validationErrorList.add("Image Name" + commonErrorMessageConstant.getBlankError());
+				validationErrorList.add("Background Image Name" + commonErrorMessageConstant.getBlankError());
 			}
-			
-			
 		}catch(Exception e) {
 			throw new MovieException(e.getMessage());
 		}

@@ -1,7 +1,7 @@
 import {createRouter,createWebHistory} from 'vue-router'
 import HomePage from '../components/HomePage'
 import MoviePage from '../components/MoviePage'
-
+import TheaterPage from '../components/TheaterPage'
 const routes=[
     {
         path:'/',
@@ -9,9 +9,15 @@ const routes=[
         component: HomePage
     },
     {
-        path:'/movie/:movieName',
+        path:'/movie/:cityName/:movieName',
         name:'Movie',
         component: MoviePage
+        
+    },
+    {
+        path:'/theater/:cityName/:movieName',
+        name:'Theater',
+        component: TheaterPage
         
     }
 ]
