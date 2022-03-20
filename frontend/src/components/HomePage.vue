@@ -118,11 +118,13 @@ export default {
                 })
         },
         getMovies(cityName) {
+            this.movies = [];
             this.selectedCity = cityName;
             axios.get('http://localhost:8081/api/movies/'+this.selectedCity)
                 .then((response) => {
                     console.log(response.data)
-                    this.movies = response.data;
+                    this.movies = response.data
+                    
                 })
                 .catch((error) => {
                     console.log(error)

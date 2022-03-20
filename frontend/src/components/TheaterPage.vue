@@ -112,36 +112,17 @@
                         <div class="slick-track"
                             style="opacity: 1; width: 15000px; transform: translate3d(-1px, 0px, 0px);display:flex">
                             <li class="date-details _active slick-slide slick-current slick-active" data-slick-index="0"
-                                aria-hidden="false">
+                                aria-hidden="false" v-for="showDate in showDatesList" :key="showDate.id">
                                 <a class="date-href"
                                     href="/buytickets/gangubai-kathiawadi-delhincr/movie-ncr-ET00114897-MT/today"
                                     onclick="BMS.Misc.fnBusy(true);">
                                     <div class="date-numeric">
-                                        08 </div>
+                                        {{showDate.date}} </div>
                                     <div class="date-day">
-                                        TODAY </div>
+                                        {{showDate.day}} </div>
                                 </a>
                             </li>
-                            <li class="date-details  slick-slide" data-slick-index="1" aria-hidden="true">
-                                <a class="date-href"
-                                    href="/buytickets/gangubai-kathiawadi-delhincr/movie-ncr-ET00114897-MT/tomorrow"
-                                    onclick="BMS.Misc.fnBusy(true);">
-                                    <div class="date-numeric">
-                                        09 </div>
-                                    <div class="date-day">
-                                        TOM </div>
-                                </a>
-                            </li>
-                            <li class="date-details  slick-slide" data-slick-index="2" aria-hidden="true">
-                                <a class="date-href"
-                                    href="/buytickets/gangubai-kathiawadi-delhincr/movie-ncr-ET00114897-MT/20220310"
-                                    onclick="BMS.Misc.fnBusy(true);">
-                                    <div class="date-numeric">
-                                        10 </div>
-                                    <div class="date-day">
-                                        THU </div>
-                                </a>
-                            </li>
+                            
                         </div>
                     </div>
  <button class="buttons next slick-arrow" aria-label="Next" role="button" href="#"
@@ -388,16 +369,38 @@
 </template>
 
 <script>
+import ShowDate from '../class/ShowDate.js'
 export default {
-    name: 'TheaterPage',
-    data () {
+  name: 'TheaterPage',
+  data () {
         return {
             cityName : this.$route.params.cityName,
-            movieName : this.$route.params.movieName
-            
+            movieName : this.$route.params.movieName,
+            showDatesList : []
         }
+    },
+    methods : {
+        getDates() {
+            //First Date Initialization
+            const firstDate = new Date();
+            this.$ShowDate= new ShowDate(0,'TODAY',parseInt(`${firstDate.getDate()}`),parseInt(`${firstDate.getMonth()+1}`),parseInt(`${firstDate.getFullYear()}`));
+            this.showDatesList[0] = this.$ShowDate;
+            //Second Date Initialization
+            const secondDate = new Date(new Date().getTime() + 24 * 60 * 60 * 1000);
+            this.$ShowDate= new ShowDate(1,'TOM',parseInt(`${secondDate.getDate()}`),parseInt(`${secondDate.getMonth()+1}`),parseInt(`${secondDate.getFullYear()}`));
+            this.showDatesList[1] = this.$ShowDate;
+            //Third Date Initialization
+            const thirdDate = new Date(new Date().getTime() + 48 * 60 * 60 * 1000);
+            var days = ["SUN","MON","TUE","WED","THU","FRI","SAT"];
+            this.$ShowDate= new ShowDate(3,days[thirdDate.getDay()],parseInt(`${thirdDate.getDate()}`),parseInt(`${thirdDate.getMonth()+1}`),parseInt(`${thirdDate.getFullYear()}`));
+            this.showDatesList[2] = this.$ShowDate;
+            console.log(this.showDatesList);
+
+        }
+    },
+    beforeMount(){
+        this.getDates();
     }
-    
   
 }
 </script>

@@ -53,7 +53,8 @@ public class MovieShowServiceImpl implements MovieShowService{
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 			LocalDate convertedShowDate = LocalDate.parse(showDate, formatter);
 			LocalDate currentDate = LocalDate.now();
-			if(convertedShowDate.getDayOfMonth() > currentDate.getDayOfMonth() && convertedShowDate.getYear() >= currentDate.getYear() && convertedShowDate.getMonthValue() >= currentDate.getMonthValue()) {
+			if(convertedShowDate.getDayOfMonth() > currentDate.getDayOfMonth() && convertedShowDate.getYear() >= currentDate.getYear() 
+					&& convertedShowDate.getMonthValue() >= currentDate.getMonthValue()) {
 				log.info("Getting all the shows of movies for next days");
 				shows = movieShowRepository.getAllShowsByMovie(movieId);
 			}else {
