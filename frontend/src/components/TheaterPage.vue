@@ -189,217 +189,106 @@
             
             </div>
 
-            <div class="margin">
-                <div class="col-1">
-                    <div class="co-ul">
-                Cinepolis: DLF Avenue, Saket
-                 <ul>
-                    <li> M-Ticket</li>
-                     <li> M-Ticket</li>
-                </ul>
-                    </div>
-               
+<div class="margin">
 
-                </div>
-                <div class="col-2">
-                <ul>
-<li><router-link to="/TicketArrange">4.25 PM</router-link></li>
-<li><a href="#">4.25 PM</a></li>
-<li><a href="#">4.25 PM</a></li>
-<li><a href="#">4.25 PM</a></li>
-<li><a href="#">4.25 PM</a></li>
-<li><a href="#">4.25 PM</a></li>
-<li><a href="#">4.25 PM</a></li>
-                </ul>
-
-                </div>
-                </div>
-                 <div class="margin">
-                <div class="col-1">
-                    <div class="co-ul">
-                Cinepolis: DLF Avenue, Saket
-                 <ul>
-                    <li> M-Ticket</li>
-                     <li> M-Ticket</li>
-                </ul>
-                    </div>
-               
-
-                </div>
-                <div class="col-2">
-                <ul>
-<li><a href="#">4.25 PM</a></li>
-<li><a href="#">4.25 PM</a></li>
-<li><a href="#">4.25 PM</a></li>
-<li><a href="#">4.25 PM</a></li>
-<li><a href="#">4.25 PM</a></li>
-<li><a href="#">4.25 PM</a></li>
-<li><a href="#">4.25 PM</a></li>
-                </ul>
-
-                </div>
-                </div>      
-                 <div class="margin">
-                <div class="col-1">
-                    <div class="co-ul">
-                Cinepolis: DLF Avenue, Saket
-                 <ul>
-                    <li> M-Ticket</li>
-                     <li> M-Ticket</li>
-                </ul>
-                    </div>
-               
-
-                </div>
-                <div class="col-2">
-                <ul>
-<li><a href="#">4.25 PM</a></li>
-<li><a href="#">4.25 PM</a></li>
-<li><a href="#">4.25 PM</a></li>
-<li><a href="#">4.25 PM</a></li>
-<li><a href="#">4.25 PM</a></li>
-<li><a href="#">4.25 PM</a></li>
-<li><a href="#">4.25 PM</a></li>
-                </ul>
-
-                </div>
-                </div>
-                 <div class="margin">
-                <div class="col-1">
-                    <div class="co-ul">
-                Cinepolis: DLF Avenue, Saket
-                 <ul>
-                    <li> M-Ticket</li>
-                     <li> M-Ticket</li>
-                </ul>
-                    </div>
-               
-
-                </div>
-                <div class="col-2">
-                <ul>
-<li><a href="#">4.25 PM</a></li>
-<li><a href="#">4.25 PM</a></li>
-<li><a href="#">4.25 PM</a></li>
-<li><a href="#">4.25 PM</a></li>
-<li><a href="#">4.25 PM</a></li>
-<li><a href="#">4.25 PM</a></li>
-<li><a href="#">4.25 PM</a></li>
-                </ul>
-
-                </div>
-                </div>
-                 <div class="margin">
-                <div class="col-1">
-                    <div class="co-ul">
-                Cinepolis: DLF Avenue, Saket
-                 <ul>
-                    <li> M-Ticket</li>
-                     <li> M-Ticket</li>
-                </ul>
-                    </div>
-               
-
-                </div>
-                <div class="col-2">
-                <ul>
-<li><a href="#">4.25 PM</a></li>
-<li><a href="#">4.25 PM</a></li>
-<li><a href="#">4.25 PM</a></li>
-<li><a href="#">4.25 PM</a></li>
-<li><a href="#">4.25 PM</a></li>
-<li><a href="#">4.25 PM</a></li>
-<li><a href="#">4.25 PM</a></li>
-                </ul>
-
-                </div>
-                </div>
-                 <div class="margin">
-                <div class="col-1">
-                    <div class="co-ul">
-                Cinepolis: DLF Avenue, Saket
-                 <ul>
-                    <li> M-Ticket</li>
-                     <li> M-Ticket</li>
-                </ul>
-                    </div>
-               
-
-                </div>
-                <div class="col-2">
-                <ul>
-<li><a href="#">4.25 PM</a></li>
-<li><a href="#">4.25 PM</a></li>
-<li><a href="#">4.25 PM</a></li>
-<li><a href="#">4.25 PM</a></li>
-<li><a href="#">4.25 PM</a></li>
-<li><a href="#">4.25 PM</a></li>
-<li><a href="#">4.25 PM</a></li>
-                </ul>
-
-                </div>
-                </div>
-                 <div class="margin">
-                <div class="col-1">
-                    <div class="co-ul">
-                Cinepolis: DLF Avenue, Saket
-                 <ul>
-                    <li> M-Ticket</li>
-                     <li> M-Ticket</li>
-                </ul>
-                    </div>
-               
-
-                </div>
-                <div class="col-2">
-                <ul>
-<li><a href="#">4.25 PM</a></li>
-<li><a href="#">4.25 PM</a></li>
-<li><a href="#">4.25 PM</a></li>
-<li><a href="#">4.25 PM</a></li>
-<li><a href="#">4.25 PM</a></li>
-<li><a href="#">4.25 PM</a></li>
-<li><a href="#">4.25 PM</a></li>
-                </ul>
-
-                </div>
-                </div>
+    <div class="col-1" v-for="theater in theaters" :key="theater.id">
+        <div class="co-ul">
+            {{theater.name}}
+            <ul>
+                <li> M-Ticket</li>
+            </ul>
+            </div>
+        </div>
+        <div class="col-2">
+        <ul>
+            <li v-for="show in shows" :key="show.id"><router-link to="/TicketArrange">{{show.showTime}}</router-link></li>
+        </ul>
+    </div>                
+</div>
 
   </div>
 </template>
 
 <script>
 import ShowDate from '../class/ShowDate.js'
+import axios from 'axios'
 export default {
   name: 'TheaterPage',
   data () {
         return {
             cityName : this.$route.params.cityName,
             movieName : this.$route.params.movieName,
-            showDatesList : []
+            showDatesList : [],
+            theaters : [],
+            shows : []
         }
     },
     methods : {
         getDates() {
             //First Date Initialization
             const firstDate = new Date();
-            this.$ShowDate= new ShowDate(0,'TODAY',parseInt(`${firstDate.getDate()}`),parseInt(`${firstDate.getMonth()+1}`),parseInt(`${firstDate.getFullYear()}`));
+            var firstMonth=`${firstDate.getMonth()+1}`;
+            var firstDay=`${firstDate.getDate()}`;           
+            if (`${firstDate.getMonth()+1}`.length == 1){
+                firstMonth=`0`+`${firstDate.getMonth()+1}`;     
+            }
+            if (`${firstDate.getDate()}`.length == 1){
+                firstDay=`0`+`${firstDate.getDate()}`;                 
+            }
+            this.$ShowDate= new ShowDate(0,'TODAY',firstDay,firstMonth,`${firstDate.getFullYear()}`,firstDay + '-' + firstMonth + '-' + `${firstDate.getFullYear()}`);
             this.showDatesList[0] = this.$ShowDate;
             //Second Date Initialization
             const secondDate = new Date(new Date().getTime() + 24 * 60 * 60 * 1000);
-            this.$ShowDate= new ShowDate(1,'TOM',parseInt(`${secondDate.getDate()}`),parseInt(`${secondDate.getMonth()+1}`),parseInt(`${secondDate.getFullYear()}`));
+            var secondMonth=`${secondDate.getMonth()+1}`;
+            var secondDay=`${secondDate.getDate()}`;           
+            if (`${secondDate.getMonth()+1}`.length == 1){
+                secondMonth=`0`+`${secondDate.getMonth()+1}`;
+                 
+            }
+            if (`${secondDate.getDate()}`.length == 1){
+                secondDay=`0`+`${secondDate.getDate()}`;
+                 
+            }
+            this.$ShowDate= new ShowDate(1,'TOM',secondDay,secondMonth,`${secondDate.getFullYear()}`,secondDay + '-' + secondMonth + '-' + `${secondDate.getFullYear()}`);
             this.showDatesList[1] = this.$ShowDate;
             //Third Date Initialization
             const thirdDate = new Date(new Date().getTime() + 48 * 60 * 60 * 1000);
             var days = ["SUN","MON","TUE","WED","THU","FRI","SAT"];
-            this.$ShowDate= new ShowDate(3,days[thirdDate.getDay()],parseInt(`${thirdDate.getDate()}`),parseInt(`${thirdDate.getMonth()+1}`),parseInt(`${thirdDate.getFullYear()}`));
+            var thirdMonth=`${thirdDate.getMonth()+1}`;
+            var thirdDay=`${thirdDate.getDate()}`;           
+            if (`${thirdDate.getMonth()+1}`.length == 1){
+                thirdMonth=`0`+`${thirdDate.getMonth()+1}`; 
+            }
+            if (`${thirdDate.getDate()}`.length == 1){
+                thirdDay=`0`+`${thirdDate.getDate()}`; 
+            }
+            this.$ShowDate= new ShowDate(3,days[thirdDate.getDay()],thirdDay,thirdMonth,`${thirdDate.getFullYear()}`,thirdDay + '-' + thirdMonth + '-' + `${thirdDate.getFullYear()}`);
             this.showDatesList[2] = this.$ShowDate;
-            console.log(this.showDatesList);
 
+        },
+        getTheaters() {
+            axios.get('http://localhost:8081/api/theaters/'+this.cityName+'/'+this.movieName)
+            .then((response) => {
+                this.theaters = response.data;
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+        },
+        getShows() {
+            axios.get('http://localhost:8081/api/shows/'+this.movieName+'/'+this.showDatesList[0].completeDate)
+            .then((response) => {
+                this.shows = response.data;
+            })
+            .catch((error) => {
+                console.log(error)
+            })
         }
     },
     beforeMount(){
         this.getDates();
+        this.getTheaters();
+        this.getShows();
     }
   
 }

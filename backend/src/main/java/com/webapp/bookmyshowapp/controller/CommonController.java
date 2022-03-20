@@ -91,11 +91,11 @@ public class CommonController extends BaseExceptionHandler{
 	}
 	
 	@GetMapping(RestEndPoints.GET_SHOWS_BY_MOVIE)
-	public ResponseEntity<Object> getAllTheatersByCityAndRegionAndMovie(@PathVariable("movie_id") long movieId,@PathVariable("show_date") String showDate ){
+	public ResponseEntity<Object> getAllTheatersByCityAndRegionAndMovie(@PathVariable("movie_name") String movieName,@PathVariable("show_date") String showDate ){
 		Set<Show> shows = null;
 		try {
 			log.info("Show Date : " + showDate);
-			shows = movieShowService.getShowsByMovie(movieId,showDate);
+			shows = movieShowService.getShowsByMovie(movieName,showDate);
 		}catch(Exception ex) {
 			log.error("Exception Occured While geting shows " + LogConstantUtil.LOG_DBDOWN_AND_OTHER_EXCEPTION, ex);
 	    	return handle500InternalServerError(ConstantUtil.ERROR_SHOW_NOT_FOUND,ex);

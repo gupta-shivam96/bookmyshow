@@ -18,9 +18,9 @@ import com.webapp.bookmyshowapp.model.Show;
 public interface MovieShowRepository extends JpaRepository<MovieShow,MovieShowId>{
 	
 
-	@Query("Select ms.show FROM MovieShow ms where ms.movie.id = :movieId and ms.show.showTime > :currentTime")
-	Set<Show> getAllShowsByMovie(@Param("movieId") long movieId,@Param("currentTime") LocalTime currentTime);
+	@Query("Select ms.show FROM MovieShow ms where ms.movie.name = :movieName and ms.show.showTime > :currentTime")
+	Set<Show> getAllShowsByMovie(@Param("movieName") String movieName,@Param("currentTime") LocalTime currentTime);
 	
-	@Query("Select ms.show FROM MovieShow ms where ms.movie.id = :movieId")
-	Set<Show> getAllShowsByMovie(@Param("movieId") long movieId);
+	@Query("Select ms.show FROM MovieShow ms where ms.movie.name = :movieName")
+	Set<Show> getAllShowsByMovie(@Param("movieName") String movieName);
 }

@@ -46,7 +46,7 @@ public class MovieShowServiceImpl implements MovieShowService{
 	}
 
 	@Override
-	public Set<Show> getShowsByMovie(long movieId, String showDate) {
+	public Set<Show> getShowsByMovie(String movieName, String showDate) {
 		// TODO Auto-generated method stub
 		Set<Show> shows=null;
 		try {
@@ -56,11 +56,11 @@ public class MovieShowServiceImpl implements MovieShowService{
 			if(convertedShowDate.getDayOfMonth() > currentDate.getDayOfMonth() && convertedShowDate.getYear() >= currentDate.getYear() 
 					&& convertedShowDate.getMonthValue() >= currentDate.getMonthValue()) {
 				log.info("Getting all the shows of movies for next days");
-				shows = movieShowRepository.getAllShowsByMovie(movieId);
+				shows = movieShowRepository.getAllShowsByMovie(movieName);
 			}else {
 				log.info("Getting all the shows of movies for same day");
 				LocalTime currentTime = LocalTime.now();
-				shows = movieShowRepository.getAllShowsByMovie(movieId,currentTime);
+				shows = movieShowRepository.getAllShowsByMovie(movieName,currentTime);
 			}
 			
 		}catch(Exception ex) {

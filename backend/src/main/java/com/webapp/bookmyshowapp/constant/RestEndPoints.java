@@ -55,7 +55,7 @@ public class RestEndPoints {
 	
 	public static final String CREATE_SHOW = "/show/new";
 	
-	public static final String GET_SHOWS_BY_MOVIE = "/showsby/{movie_id}/{show_date}";
+	public static final String GET_SHOWS_BY_MOVIE = "/shows/{movie_name}/{show_date}";
 	
 	public static final String CREATE_TICKET = "/ticket/new";
 	public static final String GET_TICKET = "/ticket/{id}";
