@@ -279,6 +279,17 @@ export default {
             axios.get('http://localhost:8081/api/shows/'+this.movieName+'/'+this.showDatesList[0].completeDate)
             .then((response) => {
                 this.shows = response.data;
+                var formattedShowTime = ''
+                for (var i = 0; i < this.shows.length; i++) {
+                    if(parseInt(this.shows[i].showTime.split(":",1,2)) > 12){
+                        formattedShowTime = parseInt(this.shows[i].showTime.split(":",1)) - 12;
+                        formattedShowTime = formattedShowTime + ":" + this.shows[i].showTime.split(":")[1] + " PM"
+                        console.log(formattedShowTime)
+                    }else{
+                        formattedShowTime = this.shows[i].showTime + " AM";
+                    }
+                    
+                }
             })
             .catch((error) => {
                 console.log(error)
