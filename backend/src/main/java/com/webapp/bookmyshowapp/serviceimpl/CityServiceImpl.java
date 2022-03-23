@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.webapp.bookmyshowapp.exceptions.DaoException;
 import com.webapp.bookmyshowapp.form.CityCreateForm;
 import com.webapp.bookmyshowapp.model.City;
@@ -65,11 +66,13 @@ public class CityServiceImpl implements CityService {
 		// TODO Auto-generated method stub
 		List<City> cities=null;
 		try {
+			ObjectMapper obj = new ObjectMapper();
 			log.info("Fetching all cities from database");
 			cities = cityRepository.findAll();
+			log.info("Obtained Cities : " + obj.writeValueAsString(cities));
 			log.info("Cities fetched from database successfully");
 		}catch(Exception ex) {
-			throw ex;
+			//throw ex;
 		}
 		return cities;
 	}

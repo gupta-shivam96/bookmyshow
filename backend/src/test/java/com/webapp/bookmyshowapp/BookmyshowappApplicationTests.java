@@ -1,13 +1,13 @@
 package com.webapp.bookmyshowapp;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.util.ArrayList;
 import java.util.List;
 
-
-import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
@@ -17,14 +17,12 @@ import com.webapp.bookmyshowapp.serviceimpl.CityServiceImpl;
 import com.webapp.bookmyshowapp.util.DateUtil;
 
 @SpringBootTest
-
 class BookmyshowappApplicationTests {
 
-	/*@Test
-    void contextLoads() {
-    }*/
+	@Test
+	void contextLoads() {
+	}
 
-	 
 	@Autowired
 	CityServiceImpl cityServiceImpl;
 	
@@ -51,8 +49,7 @@ class BookmyshowappApplicationTests {
 		
 		Mockito.when(cityRepository.findAll()).thenReturn(cityList);
 		
-	//	Assert.assertEquals(2,cityServiceImpl.getAllCities().size());
+		assertEquals(2,cityServiceImpl.getAllCities().size());
 
 	}
-
 }

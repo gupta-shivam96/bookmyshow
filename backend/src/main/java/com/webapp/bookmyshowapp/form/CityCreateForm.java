@@ -1,11 +1,9 @@
 package com.webapp.bookmyshowapp.form;
 
+import javax.validation.constraints.NotBlank;
+
 import lombok.Getter;
 import lombok.Setter;
-
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import java.util.Set;
 
 @Getter
 @Setter
