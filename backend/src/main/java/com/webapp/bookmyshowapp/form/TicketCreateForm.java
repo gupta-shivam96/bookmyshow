@@ -26,13 +26,6 @@ public class TicketCreateForm {
 	@NotNull(message="Movie should not be null.")
 	private Map<String,String> seatDetail;
 	
-	/*@NotNull(message="Time should not be null.")
-    @JsonFormat(pattern = "HH:mm")
-    private LocalTime showTime;
-    
-    @JsonFormat(pattern = "dd-MM-yyyy")
-    private LocalDate showDate;*/
-	
 	@NotNull(message="Date should not be null.")
 	private Integer date;
 	

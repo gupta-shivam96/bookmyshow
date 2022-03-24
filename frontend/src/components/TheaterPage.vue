@@ -77,7 +77,7 @@
 										<a href="/delhincr/movies/gangubai-kathiawadi/ET00114897">
 
 									
-									Gangubai Kathiawadi</a>
+									{{movie.name}}</a>
 																	</div>
 							</h1>
 														<div class="__more-movie-data">
@@ -88,10 +88,10 @@
 									<span class="heart-icon">
 										<svg version="1.1" style="fill: #D6181F;" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve"><use xlink:href="/icons/movies-icons.svg#icon-heart"></use></svg>
 									</span>
-									<span class="__percent">82 %</span><br>
+									<span class="__percent">{{movie.rating}} %</span><br>
 									<span class="__votes">69638 VOTES</span>
 								</span>
-								<span class="__tags"><span class="__genre-tag">Biography</span><span class="__genre-tag">Crime</span><span class="__genre-tag">Drama</span><span style="display:none">Hindi</span></span><span class="__release-date" content="2022-02-25" itemprop="datePublished">Feb 25, 2022<span class="__selected-language">HINDI</span></span><span class="__selected-category">3D</span></div></div>
+								<span class="__tags"><span class="__genre-tag">Biography</span><span class="__genre-tag">{{movie.genre}}</span><span style="display:none">{{movie.language}}</span></span><span class="__release-date" content="2022-02-25" itemprop="datePublished">{{movie.releaseDate}}<span class="__selected-language">{{movie.language}}</span></span><span class="__selected-category">{{movie.screenType}}</span></div></div>
 					</div>
 				</div>
 			</div>
@@ -114,8 +114,8 @@
                             <li class="date-details _active slick-slide slick-current slick-active" data-slick-index="0"
                                 aria-hidden="false" v-for="showDate in showDatesList" :key="showDate.id">
                                 <a class="date-href"
-                                    href="/buytickets/gangubai-kathiawadi-delhincr/movie-ncr-ET00114897-MT/today"
-                                    onclick="BMS.Misc.fnBusy(true);">
+                                   v-on:click.prevent="getShows(showDate.completeDate)"
+                                    >
                                     <div class="date-numeric">
                                         {{showDate.date}} </div>
                                     <div class="date-day">
@@ -190,20 +190,18 @@
             </div>
 
 <div class="margin">
-
-    <div class="col-1" v-for="theater in theaters" :key="theater.id">
-        <div class="co-ul">
-            {{theater.name}}
-            <ul>
-                <li> M-Ticket</li>
-            </ul>
+    <div class="col-1" >
+        <div class="co-ul" v-for="theater in theaters" :key="theater.id" >
+            <div class="col-2">{{theater.name}}: <span>{{theater.address}}</span>
+                <ul v-for="show in shows" :key="show.id">
+                    <li><span><router-link to="/ticketarrange">{{show.showTime}}</router-link></span></li>
+                </ul>
             </div>
-        </div>
-        <div class="col-2">
-        <ul>
-            <li v-for="show in shows" :key="show.id"><router-link to="/TicketArrange">{{show.showTime}}</router-link></li>
-        </ul>
-    </div>                
+            
+            
+         </div>
+    </div>
+                        
 </div>
 
   </div>
@@ -216,6 +214,7 @@ export default {
   name: 'TheaterPage',
   data () {
         return {
+            movie : null,
             cityName : this.$route.params.cityName,
             movieName : this.$route.params.movieName,
             showDatesList : [],
@@ -224,6 +223,15 @@ export default {
         }
     },
     methods : {
+        getMovie() {
+            axios.get('http://localhost:8081/api/movie/'+this.movieName)
+                .then((response) => {
+                    this.movie = response.data;
+                })
+                .catch((error) => {
+                    console.log(error)
+                })
+        },
         getDates() {
             //First Date Initialization
             const firstDate = new Date();
@@ -275,8 +283,8 @@ export default {
                 console.log(error)
             })
         },
-        getShows() {
-            axios.get('http://localhost:8081/api/shows/'+this.movieName+'/'+this.showDatesList[0].completeDate)
+        getShows(showCompleteDate) {
+            axios.get('http://localhost:8081/api/shows/'+this.movieName+'/'+showCompleteDate)
             .then((response) => {
                 this.shows = response.data;
                 var formattedShowTime = ''
@@ -297,9 +305,10 @@ export default {
         }
     },
     beforeMount(){
+        this.getMovie()
         this.getDates();
         this.getTheaters();
-        this.getShows();
+        this.getShows(this.showDatesList[0].completeDate);
     }
   
 }

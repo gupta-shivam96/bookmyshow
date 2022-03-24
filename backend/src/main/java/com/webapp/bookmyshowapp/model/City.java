@@ -27,6 +27,15 @@ public class City implements Serializable{
 
 	private static final long serialVersionUID = 544731671224028312L;
 
+	//Default Constructor
+	public City() {}
+	
+	public City(Long id, String name, Date created) {
+		this.id = id;
+		this.name = name;
+		this.created = created;
+	}
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;

@@ -19,10 +19,6 @@ import com.webapp.bookmyshowapp.util.DateUtil;
 @SpringBootTest
 class BookmyshowappApplicationTests {
 
-	@Test
-	void contextLoads() {
-	}
-
 	@Autowired
 	CityServiceImpl cityServiceImpl;
 	
@@ -33,16 +29,8 @@ class BookmyshowappApplicationTests {
 	@Test
 	public void getAllCities(){
 		List<City> cityList = new ArrayList<City>();
-		City city1 = new City();
-		city1.setId(1L);
-		city1.setCreated(DateUtil.getCurrentDateAndTime());
-		city1.setName("Mumbai");
-		
-		City city2 = new City();
-		city2.setId(2L);
-		city2.setCreated(DateUtil.getCurrentDateAndTime());
-		city2.setName("Pune");
-		
+		City city1 = new City(1L,"Mumbai",DateUtil.getCurrentDateAndTime());
+		City city2 = new City(1L,"Pune",DateUtil.getCurrentDateAndTime());
 		cityList.add(city1);
 		cityList.add(city2);
 

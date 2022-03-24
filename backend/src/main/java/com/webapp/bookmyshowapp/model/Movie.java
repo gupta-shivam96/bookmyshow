@@ -33,6 +33,25 @@ public class Movie implements Serializable{
 
 	private static final long serialVersionUID = 7801948490902941821L;
 
+	public Movie() {}
+	
+	public Movie(Long id, String name, Date created, String screenType, MovieLanguage language, String duration,
+			String imageName, String backgroundImageName, Date releaseDate, Genre genre, CertificateType certificateType,
+			Integer rating) {
+		this.id = id;
+		this.name = name;
+		this.created = created;
+		this.screenType = screenType;
+		this.language = language;
+		this.duration = duration;
+		this.imageName = imageName;
+		this.backgroundImageName = backgroundImageName;
+		this.releaseDate = releaseDate;
+		this.genre = genre;
+		this.certificateType = certificateType;
+		this.rating = rating;
+	}
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;

@@ -10,6 +10,23 @@ import lombok.Setter;
 
 @Getter@Setter
 public class MovieCreateForm {
+	
+	public MovieCreateForm() {}
+	
+	public MovieCreateForm(String name,String screenType,String language,String duration,Date releaseDate,
+			String genre,String certificateType,String imageName,String backgroundImageName,Integer rating) {
+		this.name = name;
+		this.screenType = screenType;
+		this.language = language;
+		this.duration = duration;
+		this.releaseDate = releaseDate;
+		this.genre = genre;
+		this.certificateType = certificateType;
+		this.imageName = imageName;
+		this.backgroundImageName = backgroundImageName;
+		this.rating = rating;
+	}
+	
 	@NotNull(message="fullname should not be blank.")
 	private String name;
 
@@ -40,4 +57,7 @@ public class MovieCreateForm {
 	@NotNull(message="rating should not be blank.")
 	private Integer rating;
 
+	
+	
+	
 }
