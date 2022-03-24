@@ -14,11 +14,11 @@
          </td>
          <td class="SRow1">
             <div class="seatI">&nbsp;</div>
-            <div class="seatI"><a class="_blocked" href="javascript:;">1</a></div>
-            <div class="seatI"><a class="_blocked" href="javascript:;">2</a></div>
-            <div class="seatI"><a class="_blocked" href="javascript:;">3</a></div>
-            <div class="seatI"><a class="_blocked" href="javascript:;">4</a></div>
-            <div class="seatI"><a class="_blocked" href="javascript:;">5</a></div>
+            <tr v-for="premiumSeat in premiumPerSeatValues" v-bind:key="premiumSeat">
+                <td v-for="premium in premiumSeat" v-bind:key="premium">
+                    
+                </td>
+            </tr>
          </td>
       </tr>
       <tr>
@@ -53,8 +53,10 @@ export default {
     name: 'TicketArrange',
     data () {
         return {
-           maxSeat : 21,
-           seatPerRow : 5
+           maxSeat : 7,
+           seatPerRow : 2,
+           premiumPerSeatValues : [],
+           classicPerSeatValues : []
         }
     },
     methods : {
@@ -62,30 +64,22 @@ export default {
             var premiumSeatCount = Math.ceil(this.maxSeat/2)
             var classicSeatCount = this.maxSeat - premiumSeatCount
             console.log("Premium Seats : " + premiumSeatCount + " || Classic Seats : " + classicSeatCount);
-            var premiumSeats = new Array();
-            var classicSeats = new Array();
+            var premiumSeats = [];
+            var classicSeats = [];
 
-            for (var i = 1; i < premiumSeatCount+1; i++) {
+            for (let i = 1; i < premiumSeatCount+1; i++) {
                 premiumSeats.push(i);
             }
-            for (var j = premiumSeatCount+1; j < classicSeatCount+premiumSeatCount+1; j++) {
-                classicSeats.push(j);
+            for (let i = premiumSeatCount+1; i < classicSeatCount+premiumSeatCount+1; i++) {
+                classicSeats.push(i);
             }
-
-            console.log("Premium Seats = " + premiumSeats)
-            console.log("Classic Seats = " + classicSeats)
+            //Converting array into sub array
             const chunk = (arr, size) => arr.reduce((acc, e, i) => (i % size ? acc[acc.length - 1].push(e) : acc.push([e]), acc), []);
-            const premiumPerSeatValues = chunk(premiumSeats, this.seatPerRow);
-            console.log("Premium Seat per row = " + premiumPerSeatValues)
-            const classicPerSeatValues = chunk(classicSeats, this.seatPerRow);
-            console.log("Premium Seat per row = " + classicPerSeatValues)
+            this.premiumPerSeatValues= chunk(premiumSeats, this.seatPerRow);
+            console.log(this.premiumPerSeatValues)
+            this.classicPerSeatValues = chunk(classicSeats, this.seatPerRow);
+            console.log(this.classicPerSeatValues);
 
-            const values = chunk([1, 2, 3, 4, 5, 6, 7, 8], 3); 
-            console.log(values);
-
-
-            const test =Array.from({length: 10}, (v, k) => k+1);
-            console.log(test)
         }
     },
     beforeMount(){
