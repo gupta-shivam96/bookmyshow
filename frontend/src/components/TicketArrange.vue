@@ -53,8 +53,8 @@ export default {
     name: 'TicketArrange',
     data () {
         return {
-           maxSeat : 7,
-           seatPerRow : 4
+           maxSeat : 21,
+           seatPerRow : 5
         }
     },
     methods : {
@@ -62,20 +62,30 @@ export default {
             var premiumSeatCount = Math.ceil(this.maxSeat/2)
             var classicSeatCount = this.maxSeat - premiumSeatCount
             console.log("Premium Seats : " + premiumSeatCount + " || Classic Seats : " + classicSeatCount);
-            const premiumSeats = [];
-            const classicSeats = [];
+            var premiumSeats = new Array();
+            var classicSeats = new Array();
 
-            for (let i = 1; i < premiumSeatCount+1; i++) {
-                premiumSeats.push[i];
+            for (var i = 1; i < premiumSeatCount+1; i++) {
+                premiumSeats.push(i);
             }
-            for (let i = premiumSeatCount+1; i < classicSeatCount+premiumSeatCount+1; i++) {
-                classicSeats.push[i];
+            for (var j = premiumSeatCount+1; j < classicSeatCount+premiumSeatCount+1; j++) {
+                classicSeats.push(j);
             }
-            console.log("Premium Seats = " + premiumSeats[0])
-            console.log("Classic Seats = " + classicSeats[0])
-            //const chunk = (arr, size) => arr.reduce((acc, e, i) => (i % size ? acc[acc.length - 1].push(e) : acc.push([e]), acc), []);
-            //const values = chunk([1, 2, 3, 4, 5, 6, 7, 8], 3);
-            //console.log(values)
+
+            console.log("Premium Seats = " + premiumSeats)
+            console.log("Classic Seats = " + classicSeats)
+            const chunk = (arr, size) => arr.reduce((acc, e, i) => (i % size ? acc[acc.length - 1].push(e) : acc.push([e]), acc), []);
+            const premiumPerSeatValues = chunk(premiumSeats, this.seatPerRow);
+            console.log("Premium Seat per row = " + premiumPerSeatValues)
+            const classicPerSeatValues = chunk(classicSeats, this.seatPerRow);
+            console.log("Premium Seat per row = " + classicPerSeatValues)
+
+            const values = chunk([1, 2, 3, 4, 5, 6, 7, 8], 3); 
+            console.log(values);
+
+
+            const test =Array.from({length: 10}, (v, k) => k+1);
+            console.log(test)
         }
     },
     beforeMount(){
