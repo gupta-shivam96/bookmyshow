@@ -25,7 +25,6 @@ const routes=[
         path:'/ticketarrange',
         name:'TicketArrange',
         component: TicketArrange
-        
     }
 ]
 const router=createRouter({

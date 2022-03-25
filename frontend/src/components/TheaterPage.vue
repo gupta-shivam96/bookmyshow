@@ -114,7 +114,7 @@
                             <li class="date-details _active slick-slide slick-current slick-active" data-slick-index="0"
                                 aria-hidden="false" v-for="showDate in showDatesList" :key="showDate.id">
                                 <a class="date-href"
-                                   v-on:click.prevent="getShows(showDate.completeDate)"
+                                   v-on:click.prevent="getShows(showDate)"
                                     >
                                     <div class="date-numeric">
                                         {{showDate.date}} </div>
@@ -194,7 +194,7 @@
         <div class="co-ul" v-for="theater in theaters" :key="theater.id" >
             <div class="col-2">{{theater.name}}: <span>{{theater.address}}</span>
                 <ul v-for="show in shows" :key="show.id">
-                    <li><span><router-link to="/ticketarrange">{{show.showTime}}</router-link></span></li>
+                    <li><router-link v-bind:to="{path: '/ticketarrange', query: {movie: movieName, theater: theater.name,maxSeat : theater.maxSeat,showDate: selectedShowDate.date,showMonth: selectedShowDate.month,showYear: selectedShowDate.year,showTime : show.showTime}}">{{show.showTime}}</router-link></li>
                 </ul>
             </div>
             
@@ -219,7 +219,8 @@ export default {
             movieName : this.$route.params.movieName,
             showDatesList : [],
             theaters : [],
-            shows : []
+            shows : [],
+            selectedShowDate : null,
         }
     },
     methods : {
@@ -283,8 +284,10 @@ export default {
                 console.log(error)
             })
         },
-        getShows(showCompleteDate) {
-            axios.get('http://localhost:8081/api/shows/'+this.movieName+'/'+showCompleteDate)
+        getShows(showDate) {
+            this.selectedShowDate = showDate
+            console.log(this.selectedShowDate)
+            axios.get('http://localhost:8081/api/shows/'+this.movieName+'/'+showDate.completeDate)
             .then((response) => {
                 this.shows = response.data;
                 var formattedShowTime = ''
@@ -292,7 +295,7 @@ export default {
                     if(parseInt(this.shows[i].showTime.split(":",1,2)) > 12){
                         formattedShowTime = parseInt(this.shows[i].showTime.split(":",1)) - 12;
                         formattedShowTime = formattedShowTime + ":" + this.shows[i].showTime.split(":")[1] + " PM"
-                        console.log(formattedShowTime)
+                        //console.log(formattedShowTime)
                     }else{
                         formattedShowTime = this.shows[i].showTime + " AM";
                     }
@@ -308,7 +311,7 @@ export default {
         this.getMovie()
         this.getDates();
         this.getTheaters();
-        this.getShows(this.showDatesList[0].completeDate);
+        this.getShows(this.showDatesList[0]);
     }
   
 }

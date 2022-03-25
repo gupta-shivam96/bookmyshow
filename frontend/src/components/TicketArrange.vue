@@ -1,66 +1,88 @@
 <template>
-<table cellspacing="0" cellpadding="0" class="setmain">
-   <tbody>
-      <tr>
-         <td class="PriceB1" colspan="2">
-            <div class="seatP">PREMIUM-Rs. 236.00</div>
-            <div id="Clear_0000000002" class="canset" style="margin: 12px 12px 0 0; display:none;"><img src="//in.bmscdn.com/bmsin/SLIMG/1_4.gif?v1" style="margin-bottom:-4px;"><a href="javascript:;" onclick="fnClearSel('0000000002');" style="text-decoration:underline;">&nbsp;Clear Selaction</a></div>
-            <div id="MultiErr_0000000002" class="canset" style="margin: 12px 12px 0 0; display:none;"><span> X </span> &nbsp; You can't select multiple sets categories </div>
-         </td>
-      </tr>
-      <tr>
-         <td>
-            <div class="seatR Setrow1">A</div>
-         </td>
-         <td class="SRow1">
-            <div class="seatI">&nbsp;</div>
-            <tr v-for="premiumSeat in premiumPerSeatValues" v-bind:key="premiumSeat">
-                <td v-for="premium in premiumSeat" v-bind:key="premium">
-                    
-                </td>
-            </tr>
-         </td>
-      </tr>
-      <tr>
-         <td class="PriceB1" colspan="2">
-            <div class="seatP">CLASSIC-Rs. 236.00</div>
-            <div id="Clear_0000000002" class="canset" style="margin: 12px 12px 0 0; display:none;"><img src="//in.bmscdn.com/bmsin/SLIMG/1_4.gif?v1" style="margin-bottom:-4px;"><a href="javascript:;" onclick="fnClearSel('0000000002');" style="text-decoration:underline;">&nbsp;Clear Selaction</a></div>
-            <div id="MultiErr_0000000002" class="canset" style="margin: 12px 12px 0 0; display:none;"><span> X </span> &nbsp; You can't select multiple sets categories </div>
-         </td>
-      </tr>
-      <tr>
-         <td>
-            <div class="seatR Setrow1">B</div>
-         </td>
-         <td class="SRow1">
-            <div class="seatI">&nbsp;</div>
-            <div class="seatI"><a class="_blocked" href="javascript:;">1</a></div>
-            <div class="seatI"><a class="_blocked" href="javascript:;">2</a></div>
-            <div class="seatI"><a class="_blocked" href="javascript:;">3</a></div>
-            <div class="seatI"><a class="_blocked" href="javascript:;">4</a></div>
-            <div class="seatI"><a class="_blocked" href="javascript:;">5</a></div>
-         </td>
-      </tr>
-   </tbody>
-</table>
+    <!-- Premium Seats-->
+    <div class="card">
+        <div class="card-body">
+            <div class="card-header">
+              <div class="heading-color fs-title-color">PREMIUM-Rs. 500.00</div>
+            </div>
+            <div class="table-responsive">
+                <table class="table cursor">
+                    <tbody>
+                        <tr v-for="premiumSeat in premiumPerSeatValues" v-bind:key="premiumSeat">
+                            <td v-for="premium in premiumSeat" v-bind:key="premium">
+                                <input type="checkbox" :disabled = "!showAvailibility.showAvailable" class="custom-control-input " :id="premium" @change="addSeat(premium,'PREMIUM') ">
+                                <label class="custom-control-label toggle-on-off cursor" :for="premium">{{premium}}</label>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Classic Seats-->
+    <div class="card">
+        <div class="card-body">
+            <div class="card-header">
+              <div class="heading-color fs-title-color">CLASSIC-Rs. 236.00</div>
+            </div>
+            <div class="table-responsive">
+                <table class="table cursor">
+                    <tbody>
+                        <tr v-for="classicSeat in classicPerSeatValues" v-bind:key="classicSeat">
+                            <td v-for="classic in classicSeat" v-bind:key="classic">
+                                <input type="checkbox" :disabled = "!showAvailibility.showAvailable" class="custom-control-input " :id="classic" @change="addSeat(classic,'CLASSIC')">
+                                <label class="custom-control-label toggle-on-off cursor" :for="classic">{{classic}}</label> 
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="header-margin">
+            <div class="btn btn-info" @click="createTicket()">Book Ticket</div>
+        </div>
+    </div>
 </template>
 
 <script>
 
 
 // import CaRousel from './../components/carousel/CarouselName.vue'
+import axios from 'axios'
 export default {
     name: 'TicketArrange',
     data () {
         return {
-           maxSeat : 7,
-           seatPerRow : 2,
-           premiumPerSeatValues : [],
-           classicPerSeatValues : []
+            ticket : {
+                movieName : this.$route.query.movie,
+                theaterName : this.$route.query.theater,
+                date : parseInt(this.$route.query.showDate),
+                month : parseInt(this.$route.query.showMonth),
+                year : parseInt(this.$route.query.showYear),
+                hour : parseInt(this.$route.query.showTime.split(":",2)[0]),
+                minute : parseInt(this.$route.query.showTime.split(":",2)[1]),
+                premiumBookedSeats : [],
+                classicBookedSeats : []
+                
+            },
+            showAvailibility : null,
+            maxSeat : this.$route.query.maxSeat,
+            premiumPricePerSeat : 500,
+            classicPricePerSeat : 236,
+            seatPerRow : 10,
+            premiumPerSeatValues : [],
+            classicPerSeatValues : []
         }
     },
     methods : {
         getAllTicketSeats() {
+            console.log("  Movie : " + this.ticket.movieName + "  Theater : " + this.ticket.theaterName)
+            console.log(this.ticket.date)
+            console.log(this.ticket.month)
+            console.log(this.ticket.year)
+            console.log(this.ticket.hour)
+            console.log(this.ticket.minute)
             var premiumSeatCount = Math.ceil(this.maxSeat/2)
             var classicSeatCount = this.maxSeat - premiumSeatCount
             console.log("Premium Seats : " + premiumSeatCount + " || Classic Seats : " + classicSeatCount);
@@ -80,10 +102,50 @@ export default {
             this.classicPerSeatValues = chunk(classicSeats, this.seatPerRow);
             console.log(this.classicPerSeatValues);
 
+        },
+        addSeat(seatNumber,seatType) {
+            console.log(seatType);
+            if(seatType == "PREMIUM"){
+                let seatExistence = this.ticket.premiumBookedSeats.includes("P"+seatNumber);
+                if(seatExistence){
+                    this.ticket.premiumBookedSeats.splice(parseInt(this.ticket.premiumBookedSeats.indexOf("P"+seatNumber)),1);
+                }else{
+                    this.ticket.premiumBookedSeats.push("P"+seatNumber);
+                }
+                console.log(this.premiumBookedSeats)
+            }
+            if(seatType == "CLASSIC"){
+                let seatExistence = this.ticket.classicBookedSeats.includes("C"+seatNumber);
+                if(seatExistence){
+                    this.ticket.classicBookedSeats.splice(parseInt(this.ticket.classicBookedSeats.indexOf("C"+seatNumber)),1);
+                }else{
+                    this.ticket.classicBookedSeats.push("C"+seatNumber);
+                }  
+                console.log(this.classicBookedSeats)
+            }
+        },
+        getShowAvailibility(){
+            axios.post('http://localhost:8081/api/query/showavailability',this.ticket)
+            .then((response) => {
+                this.showAvailibility = response.data;
+                console.log(response);
+            }).catch((error) => {
+                console.log(error)
+            })
+        },
+        createTicket(){
+            console.log(this.ticket);
+            axios.post('http://localhost:8081/api/ticket/new',this.ticket)
+            .then((response) => {
+                console.log(response);
+            }).catch((error) => {
+                console.log(error)
+            })
         }
     },
     beforeMount(){
         this.getAllTicketSeats();
+        this.getShowAvailibility();
     }
   
 };
@@ -92,192 +154,65 @@ export default {
 </script>
 
 <style>
-.__seat-action {
-    background: #fff;
-    padding: 10px;
-    text-align: center;
-    box-shadow: 0 0 10px 0 rgb(0 0 0 / 50%);
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    z-index: 99;
+
+.text-format{
+    font-size: x-large;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: bold;
+    color:black;
 }
-.bar-btn._small {
-    width: 30%;
-        margin: auto;
+
+.toggle-on-off{
+  font-size: large;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-weight: bold;
+  color:brown;
 }
-.bar-btn._primary {
-    background: #f84464;
-    color: #fff;
+
+
+.pipe {
+    float:left; 
+    display:block;
+    margin:5px; 
+    padding:0 10px; 
+    border-left:#ccc solid 1px;
 }
-.__seat-action {
-    background: #fff;
-    padding: 10px;
-    text-align: center;
-    box-shadow: 0 0 10px 0 rgb(0 0 0 / 50%);
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    z-index: 99;
-}
-.bar-btn {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 49%;
-    height: 100%;
-    box-shadow: 0 1px 8px rgb(0 0 0 / 16%);
-    border-radius: 8px;
+
+.cursor{
     cursor: pointer;
-    min-height: 40px;
 }
-.container._seat {
-    overflow-y: auto;
-}
-.bkf-layout .bkf-container {
-    width: 100%;
-    zoom: 1;
-    display: none;
-    position: relative;
-    height: 100%;
-}
-.__double-booking {
-    display: block;
+
+.header-margin{
     margin-bottom: 10px;
-    color: #c02c39;
-    font-size: 14px;
-    text-align: center;
-    margin-top: 20px;
 }
-.seat-container {
-    display: block;
-    width: 100%;
-    margin: 0 auto;
-    background: #fafafa;
-    overflow-y: auto;
+
+.link-font-size-weight-color{
+  font-size: large;
+  color:#00BFFF;
 }
-.rem-seats {
-    text-align: center;
-    margin: 12px auto;
-    display: none;
+.link-hover:hover{
+  text-decoration: underline;
+  color:#17a2b8;
+  font-weight: bold;
+  
 }
-.popular-seat-msg-box {
-    position: absolute;
-    right: 20px;
-    top: 20px;
-    cursor: pointer;
-    display: none;
+
+.link-font-size-weight-color-collapse{
+  font-size: larger;
+  color:#ffffff;
 }
- .info-icon {
-    position: relative;
-    width: 16px;
-    height: 16px;
-    margin-left: 5px;
-    display: inline-block;
+.link-hover-collapse:hover{
+  color:white;
+  font-weight: bold;
+  
 }
-.pop-tool-tip {
-    width: 200px;
-    right: -8px;
-    font-size: .8em;
-    text-align: center;
-    position: absolute;
-    cursor: default;
-    border: 1px solid;
-    color: #fff;
-    background: rgba(0,0,0,.6);
-    border-radius: 2px;
-    margin-top: 5px;
-    padding: 10px;
-    display: none;
+
+.heading-color{
+  background-color: #cea4a4;
 }
-.seats {
-    width: 100%;
-    position: relative;
-    z-index: 1;
-    zoom: 1;
-    padding: 50px 30px;
-    background: #fafafa;
+
+.fs-title-color{
+  color:rgb(32, 16, 43);
 }
-.__block {
-    padding-bottom: 20px;
-    width: 100%;
-}
-table {
-    z-index: 1;
-    width: 100%;
-}
-.status-9 {
-    display:none;
-}
-.seatI a:hover{
-    background-color: #1ea83c;
-}
-._available:hover {
-    background-color: #1ea83c;
-}
-.seatP {
-    width: 100%;
-    color: #999;
-    font-size: 12px;
-    margin-bottom: 5px;
-    text-align: left;
-    padding-bottom: 10px;
-    border-bottom: 1px solid #ececec;
-}
-.seat-social-distancing {
-    width: 16px;
-    height: 16px;
-}
-.seatI a {
-    display: inline-block;
-    font-size: 10px;
-    line-height: 25px;
-    font-weight: 400;
-    background: #fff;
-    vertical-align: top;
-}
-.seats .__block>div table .seatI a {
-    display: inline-block;
-    font-size: 10px;
-    line-height: 25px;
-    font-weight: 400;
-    background: #fff;
-    vertical-align: top;
-}
- a._selected {
-    color: #fff;
-    background-color: #1ea83c!important;
-    border-color: #1ea83c;
-}
- a._available {
-    border: 1px solid #1ea83c;
-}
-table a {
-    display: inline-block;
-    width: 25px;
-    height: 25px;
-    border-radius: 2px;
-    color: #1ea83c;
-    text-align: center;
-    font-size: 10px;
-}
-.seatI {
-    margin: 4px;
-    float: left;
-    width: 25px;
-    height: 25px;
-}
-.seat-svg-container {
-    display: flex;
-    height: 25px;
-    width: 25px;
-    overflow: hidden;
-    justify-content: center;
-    align-items: center;
-} .PriceB1 {
-    position: relative;
-    z-index: 1;
-}
+
 </style>
