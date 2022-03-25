@@ -1,6 +1,6 @@
 package com.webapp.bookmyshowapp.bean;
 
-import java.util.Map;
+import java.util.List;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -10,5 +10,7 @@ public class ShowAvailiabilityResponseBean {
 	
 	private Boolean showAvailable;
 	
-	Map<String, String> bookedSeatDetails;
+	private List<String> premiumBookedSeats;
+	
+	private List<String> classicBookedSeats;
 }

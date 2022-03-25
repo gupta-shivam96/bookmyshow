@@ -10,7 +10,7 @@
                     <tbody>
                         <tr v-for="premiumSeat in premiumPerSeatValues" v-bind:key="premiumSeat">
                             <td v-for="premium in premiumSeat" v-bind:key="premium">
-                                <input type="checkbox" :disabled = "!showAvailibility.showAvailable" class="custom-control-input " :id="premium" @change="addSeat(premium,'PREMIUM') ">
+                                <input type="checkbox" :disabled = "!showAvailibility.showAvailable || showAvailibility.premiumBookedSeats.includes('P'+premium)"  class="custom-control-input " :id="premium" @change="addSeat(premium,'PREMIUM') ">
                                 <label class="custom-control-label toggle-on-off cursor" :for="premium">{{premium}}</label>
                             </td>
                         </tr>
@@ -31,7 +31,7 @@
                     <tbody>
                         <tr v-for="classicSeat in classicPerSeatValues" v-bind:key="classicSeat">
                             <td v-for="classic in classicSeat" v-bind:key="classic">
-                                <input type="checkbox" :disabled = "!showAvailibility.showAvailable" class="custom-control-input " :id="classic" @change="addSeat(classic,'CLASSIC')">
+                                <input type="checkbox" :disabled = "!showAvailibility.showAvailable || showAvailibility.classicBookedSeats.includes('C'+classic)" class="custom-control-input " :id="classic" @change="addSeat(classic,'CLASSIC')">
                                 <label class="custom-control-label toggle-on-off cursor" :for="classic">{{classic}}</label> 
                             </td>
                         </tr>

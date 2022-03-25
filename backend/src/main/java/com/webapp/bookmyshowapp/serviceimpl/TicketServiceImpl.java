@@ -2,6 +2,8 @@ package com.webapp.bookmyshowapp.serviceimpl;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.webapp.bookmyshowapp.bean.ShowAvailiabilityBean;
 import com.webapp.bookmyshowapp.bean.ShowAvailiabilityResponseBean;
+import com.webapp.bookmyshowapp.enums.SeatType;
 import com.webapp.bookmyshowapp.form.ShowAvailiabilityFetchForm;
 import com.webapp.bookmyshowapp.form.TicketCreateForm;
 import com.webapp.bookmyshowapp.model.SeatDetail;
@@ -45,7 +48,12 @@ public class TicketServiceImpl implements TicketService{
 		SeatDetail seatDetail = new SeatDetail();
 		Ticket ticket = null;
 		try {
-			seatDetail.setSeatTypeNumber(ticketCreateForm.getSeatDetail());
+			Map<String,String> seatTypeNumberDetails = new HashMap<String,String>();
+			String premiumSeats = String.join(",", ticketCreateForm.getPremiumBookedSeats());
+			String classicSeats = String.join(",", ticketCreateForm.getClassicBookedSeats());
+			seatTypeNumberDetails.put(SeatType.PREMIUM.toString(), premiumSeats);
+			seatTypeNumberDetails.put(SeatType.CLASSIC.toString(), classicSeats);
+			seatDetail.setSeatTypeNumber(seatTypeNumberDetails);
 			log.info("Persisting seat detail record in db");
 			seatDetail = seatDetailRepository.save(seatDetail);
 			log.info("Persisted seat detail record in db successfully with id : " + seatDetail.getId());
@@ -85,24 +93,25 @@ public class TicketServiceImpl implements TicketService{
 			showAvailiabilityBean = ticketRepository.getShowAvailibility(showAvailiabilityFetchForm.getTheaterName(), showAvailiabilityFetchForm.getMovieName(),showDate, showTime);
 			log.info("Show availiability fetched successfully from db");
 			if(Objects.nonNull(showAvailiabilityBean)) {
-				Map<String,String> seatTypeNumber = new HashMap<>();
+				List<String> premiumBookedSeats = new ArrayList<>();
+				List<String> classicBookedSeats = new ArrayList<>();
 				int totalBookedSeat=0;
 				int maxSeat=0;
 				for(ShowAvailiabilityBean showAvaialiability : showAvailiabilityBean) {
 					for(Map.Entry<String,String> entry : showAvaialiability.getSeatDetails().getSeatTypeNumber().entrySet()) {
 						totalBookedSeat = totalBookedSeat + entry.getValue().split(",").length;
 						maxSeat=showAvaialiability.getMaxSeat();
-						String currentValue;
-						currentValue = seatTypeNumber.getOrDefault(entry.getKey(),"");
-						if(!currentValue.equals("")) {
-							currentValue = "," + currentValue;
+						if(entry.getKey().equals(SeatType.PREMIUM.toString())) {
+							Collections.addAll(premiumBookedSeats, entry.getValue().split(","));
+						}else if(entry.getKey().equals(SeatType.CLASSIC.toString())) {
+							Collections.addAll(classicBookedSeats, entry.getValue().split(","));
 						}
-						seatTypeNumber.put(entry.getKey(), entry.getValue() + currentValue);
 					}
 
 				}
 				showAvailiabilityResponseBean = new ShowAvailiabilityResponseBean();
-				showAvailiabilityResponseBean.setBookedSeatDetails(seatTypeNumber);
+				showAvailiabilityResponseBean.setPremiumBookedSeats(premiumBookedSeats);
+				showAvailiabilityResponseBean.setClassicBookedSeats(classicBookedSeats);
 				if(maxSeat == totalBookedSeat && totalBookedSeat != 0) {
 					showAvailiabilityResponseBean.setShowAvailable(false);
 				}else {

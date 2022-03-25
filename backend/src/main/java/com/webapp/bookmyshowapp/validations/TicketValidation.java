@@ -27,14 +27,17 @@ public class TicketValidation {
      */
     public List<String> validate(TicketCreateForm ticketCreateForm, List<String> validationErrorList) throws TicketException {
         try {
-        	if(Objects.isNull(ticketCreateForm.getTheater())) {
+        	if(Objects.isNull(ticketCreateForm.getTheaterName())) {
             	validationErrorList.add("Theater " + commonErrorMessageConstant.getEmptyError());
             }
-            if(Objects.isNull(ticketCreateForm.getMovie())) {
+            if(Objects.isNull(ticketCreateForm.getMovieName())) {
             	validationErrorList.add("Movie " + commonErrorMessageConstant.getEmptyError());
             }
-            if(Objects.isNull(ticketCreateForm.getSeatDetail())) {
-            	validationErrorList.add("Seat Detail" + commonErrorMessageConstant.getEmptyError());
+            if(Objects.isNull(ticketCreateForm.getHour())) {
+            	validationErrorList.add("Hour Detail" + commonErrorMessageConstant.getEmptyError());
+            }
+            if(Objects.isNull(ticketCreateForm.getMinute())) {
+            	validationErrorList.add("Minute Detail" + commonErrorMessageConstant.getEmptyError());
             }
             if(Objects.isNull(ticketCreateForm.getDate())) {
             	validationErrorList.add("Date " + commonErrorMessageConstant.getEmptyError());
@@ -45,11 +48,11 @@ public class TicketValidation {
             if(Objects.isNull(ticketCreateForm.getYear())) {
             	validationErrorList.add("Year " + commonErrorMessageConstant.getEmptyError());
             }
-            if(Objects.isNull(ticketCreateForm.getShow())) {
-            	validationErrorList.add("Show " + commonErrorMessageConstant.getEmptyError());
+            if(Objects.isNull(ticketCreateForm.getClassicBookedSeats())) {
+            	validationErrorList.add("ClassicBookedSeats " + commonErrorMessageConstant.getEmptyError());
             }
-            if(Objects.isNull(ticketCreateForm.getPrice())) {
-            	validationErrorList.add("Price " + commonErrorMessageConstant.getEmptyError());
+            if(Objects.isNull(ticketCreateForm.getPremiumBookedSeats())) {
+            	validationErrorList.add("PremiumBookedSeats " + commonErrorMessageConstant.getEmptyError());
             }
         }catch(Exception e) {
             throw new TicketException(e.getMessage());

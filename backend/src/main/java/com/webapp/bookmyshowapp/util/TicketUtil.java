@@ -1,6 +1,7 @@
 package com.webapp.bookmyshowapp.util;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Objects;
 
@@ -72,24 +73,24 @@ public class TicketUtil extends DateUtil{
         Ticket ticket = new Ticket();
         try {
         	
-        	Movie movie = movieRepository.findByName(ticketCreateForm.getMovie().getName());
+        	Movie movie = movieRepository.findByName(ticketCreateForm.getMovieName());
         	if(Objects.isNull(movie)) {
-            	throw new MovieException("Movie Not Found For name : " + ticketCreateForm.getMovie().getName());
+            	throw new MovieException("Movie Not Found For name : " + ticketCreateForm.getMovieName());
             }
-        	Theater theater = theaterRepository.findByName(ticketCreateForm.getTheater().getName());
+        	Theater theater = theaterRepository.findByName(ticketCreateForm.getTheaterName());
         	if(Objects.isNull(theater)) {
-            	throw new TheaterException("Theater Not Found For name : " + ticketCreateForm.getTheater().getName());
+            	throw new TheaterException("Theater Not Found For name : " + ticketCreateForm.getTheaterName());
             }
-        	Show show = showRepository.findByShowTime(ticketCreateForm.getShow().getShowTime());
+        	Show show = showRepository.findByShowTime(LocalTime.of(ticketCreateForm.getHour(), ticketCreateForm.getMinute()));
         	if(Objects.isNull(show)) {
-            	throw new ShowException("Show Not Found For time : " + ticketCreateForm.getShow().getShowTime());
+            	throw new ShowException("Show Not Found For time : " + ticketCreateForm.getHour() + ":" + ticketCreateForm.getMinute());
             }
         	ticket.setMovie(movie);
         	ticket.setTheater(theater);
         	ticket.setSeatDetail(seatDetail);
         	ticket.setShowDate(LocalDate.of(ticketCreateForm.getYear(), ticketCreateForm.getMonth(), ticketCreateForm.getDate()));
         	ticket.setShow(show);
-        	ticket.setPrice(ticketCreateForm.getPrice());
+        	//ticket.setPrice(ticketCreateForm.getPrice());
         	ticket.setBookingDate(getCurrentLocalDateTime());
         	
         }catch(Exception ex) {
