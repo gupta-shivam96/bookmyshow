@@ -194,7 +194,7 @@
         <div class="co-ul" v-for="theater in theaters" :key="theater.id" >
             <div class="col-2">{{theater.name}}: <span>{{theater.address}}</span>
                 <ul v-for="show in shows" :key="show.id">
-                    <li><router-link v-bind:to="{path: '/ticketarrange', query: {movie: movieName, theater: theater.name,maxSeat : theater.maxSeat,showDate: selectedShowDate.date,showMonth: selectedShowDate.month,showYear: selectedShowDate.year,showTime : show.showTime}}">{{show.showTime}}</router-link></li>
+                    <li><router-link v-bind:to="{path: '/ticketarrange', query: {movie: movieName, theater: theater.name,maxSeat : theater.maxSeat,showDate: selectedShowDate.date,showMonth: selectedShowDate.month,showYear: selectedShowDate.year,showTime : show.showTime, premiumSeatPrice : theater.premiumSeatPrice, classicSeatPrice : theater.classicSeatPrice}}">{{show.showTime}}</router-link></li>
                 </ul>
             </div>
             
@@ -846,13 +846,13 @@ ul {
 }
 .dropdown.highlighted {
     box-shadow: inset 0 -3px 0 0 #f84464;
-    height: 20px;
+    height: px;
 }
 .dropdown {
     position: relative;
     float: left;
     padding: 15px;
-    height: 19px;
+    height: px;
     border: 1px solid #eceef1;
     top: 0;
 }

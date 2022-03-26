@@ -3,6 +3,7 @@ package com.webapp.bookmyshowapp.model;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -57,7 +58,12 @@ public class Ticket implements Serializable{
     @JoinColumn(name = "seat_detail_id", nullable = false)
     private SeatDetail seatDetail;
     
-    private Double price;
+	private Double premiumSeatPrice;
+	
+	private Double classicSeatPrice;
+	
+	@Transient
+	private Double totalPrice;
     
     @Transient
     private String invoiceNumber;
@@ -69,7 +75,14 @@ public class Ticket implements Serializable{
     	return this.invoiceNumber;
     }
     
-    
+    public Double getTotalPrice() {
+    	if(Objects.isNull(this.premiumSeatPrice)) {
+    		this.premiumSeatPrice =0.00;
+    	}else if(Objects.isNull(this.classicSeatPrice)) {
+    		this.classicSeatPrice=0.00;
+    	}
+    	return this.premiumSeatPrice + this.classicSeatPrice;
+    }
     
     
 }

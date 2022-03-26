@@ -41,6 +41,10 @@ public class Theater implements Serializable{
 	
 	private Integer maxSeat;
 	
+	private Double premiumSeatPrice;
+	
+	private Double classicSeatPrice;
+	
 	private String address;
 	
 	private Date created;

@@ -68,7 +68,7 @@ public class TicketUtil extends DateUtil{
      *
      */
 
-    public Ticket createTicket(TicketCreateForm ticketCreateForm,SeatDetail seatDetail) throws Exception{
+    public Ticket createTicket(TicketCreateForm ticketCreateForm,SeatDetail seatDetail, Integer totalNumberOfPremiumBookedSeats, Integer totalNumberOfClassicBookedSeats) throws Exception{
         log.info("Setting Values for ticket from TheaterCreateForm");
         Ticket ticket = new Ticket();
         try {
@@ -90,9 +90,17 @@ public class TicketUtil extends DateUtil{
         	ticket.setSeatDetail(seatDetail);
         	ticket.setShowDate(LocalDate.of(ticketCreateForm.getYear(), ticketCreateForm.getMonth(), ticketCreateForm.getDate()));
         	ticket.setShow(show);
-        	//ticket.setPrice(ticketCreateForm.getPrice());
         	ticket.setBookingDate(getCurrentLocalDateTime());
         	
+        	/*
+        	 * Setting Ticket Price
+        	 */
+        	if(Objects.nonNull(totalNumberOfPremiumBookedSeats)) {
+        		ticket.setPremiumSeatPrice(theater.getPremiumSeatPrice() * totalNumberOfPremiumBookedSeats);
+        	}
+        	if(Objects.nonNull(totalNumberOfClassicBookedSeats)) {
+        		ticket.setClassicSeatPrice(theater.getClassicSeatPrice() * totalNumberOfClassicBookedSeats);
+        	}
         }catch(Exception ex) {
             throw ex;
         }

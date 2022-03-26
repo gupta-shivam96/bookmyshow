@@ -15,6 +15,12 @@ public class TheaterCreateForm {
 	@NotNull(message="Seat should not be null.")
 	private Integer maxSeat;
 	
+	@NotNull(message="Premium Seat Price should not be null.")
+	private Double premiumSeatPrice;
+	
+	@NotNull(message="Classic Seat Price should not be null.")
+	private Double classicSeatPrice;
+
 	@NotBlank(message="Address should not be blank.")
 	private String address;
 	

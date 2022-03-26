@@ -3,6 +3,7 @@ import HomePage from '../components/HomePage'
 import MoviePage from '../components/MoviePage'
 import TheaterPage from '../components/TheaterPage'
 import TicketArrange from '../components/TicketArrange'
+import PaymentPage from '../components/PaymentPage'
 const routes=[
     {
         path:'/',
@@ -25,6 +26,11 @@ const routes=[
         path:'/ticketarrange',
         name:'TicketArrange',
         component: TicketArrange
+    },
+    {
+        path:'/payment',
+        name:'Payment',
+        component: PaymentPage
     }
 ]
 const router=createRouter({

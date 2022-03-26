@@ -63,11 +63,13 @@ public class TheaterUtil extends DateUtil{
         	if(Objects.isNull(subRegion)) {
             	throw new CityException("SubRegion Not Found For Name : " + theaterCreateForm.getSubRegionName());
             }
+        	theater.setPremiumSeatPrice(theaterCreateForm.getPremiumSeatPrice());
+        	theater.setClassicSeatPrice(theaterCreateForm.getClassicSeatPrice());
         	theater.setName(theaterCreateForm.getName());
         	theater.setAddress(theaterCreateForm.getAddress());
         	theater.setMaxSeat(theaterCreateForm.getMaxSeat());
         	theater.setSubRegion(subRegion);
-        	theater.setModified(getCurrentDateAndTime());
+        	theater.setCreated(getCurrentDateAndTime());
         }catch(Exception ex) {
             throw ex;
         }

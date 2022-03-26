@@ -3,7 +3,7 @@
     <div class="card">
         <div class="card-body">
             <div class="card-header">
-              <div class="heading-color fs-title-color">PREMIUM-Rs. 500.00</div>
+              <div class="heading-color fs-title-color">PREMIUM-Rs. {{premiumSeatPrice}}</div>
             </div>
             <div class="table-responsive">
                 <table class="table cursor">
@@ -24,7 +24,7 @@
     <div class="card">
         <div class="card-body">
             <div class="card-header">
-              <div class="heading-color fs-title-color">CLASSIC-Rs. 236.00</div>
+              <div class="heading-color fs-title-color">CLASSIC-Rs. {{classicSeatPrice}}</div>
             </div>
             <div class="table-responsive">
                 <table class="table cursor">
@@ -68,8 +68,8 @@ export default {
             },
             showAvailibility : null,
             maxSeat : this.$route.query.maxSeat,
-            premiumPricePerSeat : 500,
-            classicPricePerSeat : 236,
+            premiumSeatPrice : this.$route.query.premiumSeatPrice,
+            classicSeatPrice : this.$route.query.classicSeatPrice,
             seatPerRow : 10,
             premiumPerSeatValues : [],
             classicPerSeatValues : []
@@ -138,6 +138,7 @@ export default {
             axios.post('http://localhost:8081/api/ticket/new',this.ticket)
             .then((response) => {
                 console.log(response);
+                this.$router.push({ path: '/payment', query: { ticketId : response.data.id} })
             }).catch((error) => {
                 console.log(error)
             })

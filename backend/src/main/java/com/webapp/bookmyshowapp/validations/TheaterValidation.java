@@ -34,6 +34,12 @@ public class TheaterValidation {
             if(Objects.isNull(theaterCreateForm.getMaxSeat())) {
             	validationErrorList.add("Seat" + commonErrorMessageConstant.getEmptyError());
             }
+            if(Objects.isNull(theaterCreateForm.getClassicSeatPrice())) {
+            	validationErrorList.add("Classic seat price" + commonErrorMessageConstant.getEmptyError());
+            }
+            if(Objects.isNull(theaterCreateForm.getPremiumSeatPrice())) {
+            	validationErrorList.add("Premium seat price" + commonErrorMessageConstant.getEmptyError());
+            }
             if(StringUtils.isEmpty(theaterCreateForm.getAddress())) {
                 validationErrorList.add("Address" + commonErrorMessageConstant.getBlankError());
             }

@@ -48,11 +48,8 @@ public class TicketValidation {
             if(Objects.isNull(ticketCreateForm.getYear())) {
             	validationErrorList.add("Year " + commonErrorMessageConstant.getEmptyError());
             }
-            if(Objects.isNull(ticketCreateForm.getClassicBookedSeats())) {
-            	validationErrorList.add("ClassicBookedSeats " + commonErrorMessageConstant.getEmptyError());
-            }
-            if(Objects.isNull(ticketCreateForm.getPremiumBookedSeats())) {
-            	validationErrorList.add("PremiumBookedSeats " + commonErrorMessageConstant.getEmptyError());
+            if(Objects.isNull(ticketCreateForm.getPremiumBookedSeats()) && Objects.isNull(ticketCreateForm.getClassicBookedSeats())) {
+            	validationErrorList.add("ClassicBookedSeats & PremiumBookedSeats" + commonErrorMessageConstant.getEmptyError());
             }
         }catch(Exception e) {
             throw new TicketException(e.getMessage());

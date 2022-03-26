@@ -47,17 +47,25 @@ public class TicketServiceImpl implements TicketService{
 		// TODO Auto-generated method stub
 		SeatDetail seatDetail = new SeatDetail();
 		Ticket ticket = null;
+		Integer totalNumberOfPremiumBookedSeats = null;
+		Integer totalNumberOfClassicBookedSeats = null;
 		try {
 			Map<String,String> seatTypeNumberDetails = new HashMap<String,String>();
-			String premiumSeats = String.join(",", ticketCreateForm.getPremiumBookedSeats());
-			String classicSeats = String.join(",", ticketCreateForm.getClassicBookedSeats());
-			seatTypeNumberDetails.put(SeatType.PREMIUM.toString(), premiumSeats);
-			seatTypeNumberDetails.put(SeatType.CLASSIC.toString(), classicSeats);
+			if(!ticketCreateForm.getPremiumBookedSeats().isEmpty() && Objects.nonNull(ticketCreateForm.getPremiumBookedSeats())) {
+				totalNumberOfPremiumBookedSeats=ticketCreateForm.getPremiumBookedSeats().size();
+				String premiumSeats = String.join(",", ticketCreateForm.getPremiumBookedSeats());
+				seatTypeNumberDetails.put(SeatType.PREMIUM.toString(), premiumSeats);
+			}
+			if(!ticketCreateForm.getClassicBookedSeats().isEmpty() && Objects.nonNull(ticketCreateForm.getClassicBookedSeats())) {
+				totalNumberOfClassicBookedSeats=ticketCreateForm.getClassicBookedSeats().size();
+				String classicSeats = String.join(",", ticketCreateForm.getClassicBookedSeats());
+				seatTypeNumberDetails.put(SeatType.CLASSIC.toString(), classicSeats);
+			}
 			seatDetail.setSeatTypeNumber(seatTypeNumberDetails);
 			log.info("Persisting seat detail record in db");
 			seatDetail = seatDetailRepository.save(seatDetail);
 			log.info("Persisted seat detail record in db successfully with id : " + seatDetail.getId());
-			ticket = ticketUtil.createTicket(ticketCreateForm, seatDetail);
+			ticket = ticketUtil.createTicket(ticketCreateForm, seatDetail, totalNumberOfPremiumBookedSeats, totalNumberOfClassicBookedSeats);
 			log.info("Persisting ticket detail record in db");
 			ticket = ticketRepository.save(ticket);
 			log.info("Persisted ticket detail record in db successfully with id : " + ticket.getId());
